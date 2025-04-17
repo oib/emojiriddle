@@ -1,0 +1,81 @@
+body {
+  max-width: 960px;
+  margin: auto;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#guess-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-field {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  width: 100px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  padding: 0.3rem 0.5rem;
+  box-sizing: border-box;
+  appearance: textfield;
+}
+
+.guess-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.btn-check {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+#feedback {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+#feedback.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+button.emoji-btn {
+  font-size: 2rem;
+  width: 80px;
+  height: 80px;
+  margin: 0.5rem;
+  border: 2px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+button.emoji-btn:hover {
+  background: #eee;
+}
+
