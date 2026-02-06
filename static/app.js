@@ -30,13 +30,14 @@ function renderInputForm(emojis) {
   const form = document.createElement("form")
   form.id = "guess-form"
 
-  emojis.forEach(emoji => {
+  emojis.forEach((emoji, index) => {
     const label = document.createElement("label")
     label.classList.add("guess-label")
 
     const emojiSpan = document.createElement("span")
     emojiSpan.textContent = emoji
     emojiSpan.style.marginRight = "0.5rem"
+    emojiSpan.style.setProperty('--i', index) // For floating animation
 
     const input = document.createElement("input")
     input.type = "number"
@@ -80,8 +81,15 @@ function renderInputForm(emojis) {
 
       const result = await res.json()
       feedback.textContent = result.result
-      feedback.style.color = result.result.includes("✅") ? "#1e7c1e" : "#cc3333"
       feedback.style.opacity = 0
+      
+      // Add appropriate class for styling
+      feedback.classList.remove('show-correct', 'show-incorrect')
+      if (result.result.includes("✅")) {
+        feedback.classList.add('show-correct')
+      } else {
+        feedback.classList.add('show-incorrect')
+      }
 
       if (result.result.includes("❌")) {
         feedback.classList.remove("shake")
@@ -93,13 +101,14 @@ function renderInputForm(emojis) {
         feedback.style.opacity = 1
         form.querySelector("input")?.focus()
         if (feedback.textContent.includes("✅")) {
-          feedback.textContent += " 🎉 Neue Runde startet in 3 Sekunden..."
+          feedback.textContent += " 🎉 New round starts in 3 seconds..."
           setTimeout(() => location.reload(), 3000)
         }
       }, 50)
     } catch (err) {
       feedback.textContent = "⚠️ Error: " + err.message
-      feedback.style.color = "#cc3333"
+      feedback.classList.remove('show-correct', 'show-incorrect')
+      feedback.classList.add('show-incorrect')
       feedback.style.opacity = 1
     }
   }
